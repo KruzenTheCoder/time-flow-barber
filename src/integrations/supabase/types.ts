@@ -14,7 +14,173 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          client_id: string
+          created_at: string
+          deposit_amount: number | null
+          id: string
+          notes: string | null
+          scheduled_at: string
+          service_duration: number
+          service_name: string
+          service_price: number
+          status: string
+          total_amount: number | null
+          updated_at: string
+          vendor_id: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          deposit_amount?: number | null
+          id?: string
+          notes?: string | null
+          scheduled_at: string
+          service_duration: number
+          service_name: string
+          service_price: number
+          status?: string
+          total_amount?: number | null
+          updated_at?: string
+          vendor_id: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          deposit_amount?: number | null
+          id?: string
+          notes?: string | null
+          scheduled_at?: string
+          service_duration?: number
+          service_name?: string
+          service_price?: number
+          status?: string
+          total_amount?: number | null
+          updated_at?: string
+          vendor_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_vendor_id_fkey"
+            columns: ["vendor_id"]
+            isOneToOne: false
+            referencedRelation: "vendors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      vendors: {
+        Row: {
+          active: boolean | null
+          address: string
+          business_hours: Json | null
+          business_name: string
+          city: string
+          created_at: string
+          description: string | null
+          email: string | null
+          id: string
+          instagram_handle: string | null
+          latitude: number | null
+          longitude: number | null
+          phone: string | null
+          portfolio_images: string[] | null
+          postal_code: string | null
+          province: string
+          rating: number | null
+          review_count: number | null
+          services: Json | null
+          updated_at: string
+          user_id: string
+          verified: boolean | null
+          website: string | null
+        }
+        Insert: {
+          active?: boolean | null
+          address: string
+          business_hours?: Json | null
+          business_name: string
+          city: string
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          instagram_handle?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          phone?: string | null
+          portfolio_images?: string[] | null
+          postal_code?: string | null
+          province: string
+          rating?: number | null
+          review_count?: number | null
+          services?: Json | null
+          updated_at?: string
+          user_id: string
+          verified?: boolean | null
+          website?: string | null
+        }
+        Update: {
+          active?: boolean | null
+          address?: string
+          business_hours?: Json | null
+          business_name?: string
+          city?: string
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          instagram_handle?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          phone?: string | null
+          portfolio_images?: string[] | null
+          postal_code?: string | null
+          province?: string
+          rating?: number | null
+          review_count?: number | null
+          services?: Json | null
+          updated_at?: string
+          user_id?: string
+          verified?: boolean | null
+          website?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
