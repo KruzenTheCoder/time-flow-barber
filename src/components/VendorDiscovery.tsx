@@ -116,8 +116,8 @@ const VendorDiscovery = () => {
         .select('*')
         .eq('active', true);
 
-      // Filter by province if selected
-      if (selectedProvince) {
+      // Filter by province if selected and not "all"
+      if (selectedProvince && selectedProvince !== 'all') {
         query = query.eq('province', selectedProvince);
       }
 
@@ -189,7 +189,7 @@ const VendorDiscovery = () => {
             <SelectValue placeholder="Select province" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All provinces</SelectItem>
+            <SelectItem value="all">All provinces</SelectItem>
             {provinces.map((province) => (
               <SelectItem key={province} value={province}>
                 {province}
