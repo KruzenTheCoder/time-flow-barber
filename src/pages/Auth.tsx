@@ -7,10 +7,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
-import { Loader2, Chrome } from 'lucide-react';
+import { Loader2, User, Store } from 'lucide-react';
 
 const Auth = () => {
-  const { user, signUp, signIn, signInWithGoogle, loading } = useAuth();
+  const { user, signUp, signIn, loading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -80,15 +80,28 @@ const Auth = () => {
     setIsLoading(false);
   };
 
-  const handleGoogleSignIn = async () => {
+  const handleDemoUser = async () => {
     setIsLoading(true);
-    const { error } = await signInWithGoogle();
+    const { error } = await signIn('user@demo.com', 'demo123456');
     
     if (error) {
-      toast.error(error.message || 'Google sign in failed');
-      setIsLoading(false);
+      toast.error('Demo user sign in failed');
+    } else {
+      toast.success('Signed in as demo user!');
     }
-    // Don't set loading to false here as we're redirecting
+    setIsLoading(false);
+  };
+
+  const handleDemoVendor = async () => {
+    setIsLoading(true);
+    const { error } = await signIn('vendor@demo.com', 'demo123456');
+    
+    if (error) {
+      toast.error('Demo vendor sign in failed');
+    } else {
+      toast.success('Signed in as demo vendor!');
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -108,19 +121,29 @@ const Auth = () => {
           </CardHeader>
 
           <CardContent>
-            <Button
-              variant="outline"
-              className="w-full mb-4"
-              onClick={handleGoogleSignIn}
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Chrome className="mr-2 h-4 w-4" />
-              )}
-              Continue with Google
-            </Button>
+            <div className="space-y-3 mb-6">
+              <p className="text-sm text-center text-muted-foreground">Try demo accounts:</p>
+              <div className="grid grid-cols-2 gap-3">
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={handleDemoUser}
+                  disabled={isLoading}
+                >
+                  <User className="mr-2 h-4 w-4" />
+                  Demo User
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={handleDemoVendor}
+                  disabled={isLoading}
+                >
+                  <Store className="mr-2 h-4 w-4" />
+                  Demo Vendor
+                </Button>
+              </div>
+            </div>
 
             <div className="relative mb-4">
               <div className="absolute inset-0 flex items-center">
